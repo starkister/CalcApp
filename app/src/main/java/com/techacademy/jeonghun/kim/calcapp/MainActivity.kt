@@ -8,6 +8,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import android.content.Intent
 import com.techacademy.jeonghun.kim.calcapp.CalType
 import androidx.appcompat.app.AlertDialog
+import com.google.android.material.snackbar.Snackbar
 
 class MainActivity : AppCompatActivity(),View.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -18,12 +19,23 @@ class MainActivity : AppCompatActivity(),View.OnClickListener {
         button2.setOnClickListener(this)
         button3.setOnClickListener(this)
         button4.setOnClickListener(this)
+
+
+
     }
 
     override fun onClick(v: View) {
         var firstNumber = 0F
         var secondNumber = 0F
         //parsing
+        if(editText1.text.toString() == "" || editText1.text == null){
+            Snackbar.make(v, "一番目欄に数値を入力してください", Snackbar.LENGTH_LONG)
+                .setAction("Action", null).show()
+        }
+        else if(editText2.text.toString() == "" || editText2.text == null){
+            Snackbar.make(v, "二番目欄に数値を入力してください", Snackbar.LENGTH_LONG)
+                .setAction("Action", null).show()
+        }
         try{
             val num = editText1.text.toString().toFloat()
             firstNumber = num;
@@ -65,7 +77,7 @@ class MainActivity : AppCompatActivity(),View.OnClickListener {
     private fun showAlertDialog() {
         val alertDialogBuilder = AlertDialog.Builder(this)
         alertDialogBuilder.setTitle("数値エラー")
-        alertDialogBuilder.setMessage("0ではわけわれません")
+        alertDialogBuilder.setMessage("0では分けられません")
 
         val alertDialog = alertDialogBuilder.create()
         alertDialog.show()
